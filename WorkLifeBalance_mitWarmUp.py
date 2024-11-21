@@ -7,6 +7,8 @@ arbeitszeit = 8 * 60 * 60  # 8 Stunden in Sekunden
 pausenintervall = 90 * 60  # 90 Minuten in Sekunden
 pausenzeit = 7.5 * 60  # 7.5 Minuten in Sekunden
 
+
+
 # Lieblingslied
 lieblingslied_url = "https://www.youtube.com/watch?v=V8EkSVxE0mo"  
 
@@ -57,14 +59,25 @@ def warmUp():
     else:
         print("Na schön, weiter an die Arbeit!")
 
-# Hauptfunktion für den Lernzyklus
+# Hauptfunktion für die Arbeitszeit
 def arbeiten():
+    pausen_counter = 0 # Zählt die Pausen
     startzeit = time.time()  # Startzeit für die Arbeitszeit
     while time.time() - startzeit < arbeitszeit:
         print("Arbeiten... Noch 90 Minuten bis zur nächsten Pause.")
         time.sleep(pausenintervall)  # 90 Minuten arbeiten
         pause_machen()
+        pausen_counter += 1
+
         warmUp() # Nach jeder Pause wird ein Warm-Up angefragt
+
+    vergangene_arbeitszeit = time.time()- startzeit # Zeigt die Arbeitszeit an
+    print(f"Du arbeitest seit {vergangene_arbeitszeit // 60:.1f} Minuten.")
+    print(f"Du hast {pausen_counter} Pausen eingelegt.")
+
+
+    gesamt_zeit = time.time() - startzeit
+    print(f"Wow toll gearbeitet! Du hast insgesamt {gesamt_zeit // 60:.1f} Minuten gearbeitet und {pausen_counter} Pausen eingelegt.")
 
 # Das Programm starten
 if __name__ == "__main__":  
